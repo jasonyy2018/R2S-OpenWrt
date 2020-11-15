@@ -1,6 +1,9 @@
 #!/bin/bash
 clear
 
+svn co https://github.com/project-openwrt/openwrt/branches/master/package/ctcgfw/r8152 package/new/r8152
+sed -i '/rtl8152/d' ./target/linux/rockchip/image/armv8.mk
+
 #HW-RNG
 wget -q https://raw.githubusercontent.com/QiuSimons/R2S-OpenWrt/master/PATCH/new/main/Support-hardware-random-number-generator-for-RK3328.patch
 patch -p1 < ./Support-hardware-random-number-generator-for-RK3328.patch
@@ -28,7 +31,7 @@ sed -i 's/O2/O2/g' ./rules.mk
 sed -i 's/-f/-f -i/g' feeds/packages/utils/rng-tools/files/rngd.init
 #rc.common
 rm -rf ./package/base-files/files/etc/rc.common
-wget -P package/base-files/files/etc https://raw.githubusercontent.com/QiuSimons/Others/master/rc.common
+wget -P package/base-files/files/etc https://raw.githubusercontent.com/QiuSimons/R2S-OpenWrt/master/PATCH/duplicate/rc.common
 
 ##必要的patch
 #patch i2c0
@@ -63,7 +66,7 @@ wget -q https://raw.githubusercontent.com/QiuSimons/R2S-OpenWrt/master/PATCH/new
 patch -p1 < ./luci-app-firewall_add_sfe_switch.patch
 # SFE内核补丁
 pushd target/linux/generic/hack-5.4
-wget https://raw.githubusercontent.com/coolsnowwolf/lede/master/target/linux/generic/hack-5.4/999-shortcut-fe-support.patch
+wget https://raw.githubusercontent.com/coolsnowwolf/lede/master/target/linux/generic/hack-5.4/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
 popd
 #OC-1608
 wget -P target/linux/rockchip/patches-5.4/ https://raw.githubusercontent.com/QiuSimons/R2S-OpenWrt/master/PATCH/new/main/999-unlock-1608mhz-rk3328.patch
@@ -144,7 +147,7 @@ git clone -b master --single-branch https://github.com/jerrykuku/luci-app-argon-
 #清理内存
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-ramfree package/lean/luci-app-ramfree
 #luci-app-cpulimit
-svn co https://github.com/QiuSimons/Others/trunk/luci-app-cpulimit package/lean/luci-app-cpulimit
+wget -P package/lean/ https://raw.githubusercontent.com/QiuSimons/R2S-OpenWrt/master/PATCH/duplicate/luci-app-cpulimit
 svn co https://github.com/project-openwrt/openwrt/branches/master/package/ntlf9t/cpulimit package/lean/cpulimit
 #OpenClash
 git clone -b master --single-branch https://github.com/vernesong/OpenClash package/new/luci-app-openclash
@@ -173,10 +176,11 @@ svn co https://github.com/openwrt/packages/trunk/utils/collectd feeds/packages/u
 #FullCone模块
 cp -rf ../openwrt-lienol/package/network/fullconenat ./package/network/fullconenat
 #翻译及部分功能优化
-git clone -b master --single-branch https://github.com/QiuSimons/addition-trans-zh package/lean/lean-translate
+wget -P package/lean/ https://raw.githubusercontent.com/QiuSimons/R2S-OpenWrt/master/PATCH/duplicate/addition-trans-zh-master
 #SFE
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/shortcut-fe package/lean/shortcut-fe
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/fast-classifier package/lean/fast-classifier
+wget -P package/base-files/files/etc/init.d/ https://raw.githubusercontent.com/QiuSimons/R2S-OpenWrt/master/PATCH/duplicate/shortcut-fe
 #UPNP（回滚以解决某些沙雕设备的沙雕问题
 rm -rf ./feeds/packages/net/miniupnpd
 svn co https://github.com/coolsnowwolf/packages/trunk/net/miniupnpd feeds/packages/net/miniupnpd
