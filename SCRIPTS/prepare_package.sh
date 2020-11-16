@@ -81,7 +81,6 @@ sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/
 ##获取额外package
 #luci-app-compressed-memory
 wget -O- https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/2840.patch | patch -p1
-mkdir ./package/new
 cp -rf ../NoTengoBattery/feeds/luci/applications/luci-app-compressed-memory ./package/new/luci-app-compressed-memory
 sed -i 's,include ../..,include $(TOPDIR)/feeds/luci,g' ./package/new/luci-app-compressed-memory/Makefile
 rm -rf ./package/system/compressed-memory
@@ -147,7 +146,7 @@ git clone -b master --single-branch https://github.com/jerrykuku/luci-app-argon-
 #清理内存
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-ramfree package/lean/luci-app-ramfree
 #luci-app-cpulimit
-wget -P package/lean/ https://raw.githubusercontent.com/QiuSimons/R2S-OpenWrt/master/PATCH/duplicate/luci-app-cpulimit
+svn co https://github.com/QiuSimons/R2S-OpenWrt/trunk/PATCH/duplicate/luci-app-cpulimit package/lean/luci-app-cpulimit
 svn co https://github.com/project-openwrt/openwrt/branches/master/package/ntlf9t/cpulimit package/lean/cpulimit
 #OpenClash
 git clone -b master --single-branch https://github.com/vernesong/OpenClash package/new/luci-app-openclash
@@ -176,7 +175,7 @@ svn co https://github.com/openwrt/packages/trunk/utils/collectd feeds/packages/u
 #FullCone模块
 cp -rf ../openwrt-lienol/package/network/fullconenat ./package/network/fullconenat
 #翻译及部分功能优化
-wget -P package/lean/ https://raw.githubusercontent.com/QiuSimons/R2S-OpenWrt/master/PATCH/duplicate/addition-trans-zh-master
+svn co https://github.com/QiuSimons/R2S-OpenWrt/trunk/PATCH/duplicate/addition-trans-zh-master package/lean/addition-trans-zh-master
 #SFE
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/shortcut-fe package/lean/shortcut-fe
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/fast-classifier package/lean/fast-classifier
