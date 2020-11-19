@@ -224,7 +224,7 @@ sed -i "$ a\DISTRIB_DESCRIPTION='Built by OPoA($(date +%Y.%m.%d))@%D %V %C'" pac
 sed -i '/%D/a\ OPoA Build' package/base-files/files/etc/banner
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
-sed -i '/chinadnslist/d' package/lean/lean-translate/files/zzz-default-settings
+sed -i '/chinadnslist/d' package/lean/addition-trans-zh-master/files/zzz-default-settings
 #删除已有配置
 rm -rf .config
 #授予权限
