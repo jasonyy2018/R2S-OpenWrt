@@ -149,7 +149,7 @@ svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-ramfree 
 svn co https://github.com/QiuSimons/R2S-OpenWrt/trunk/PATCH/duplicate/luci-app-cpulimit package/lean/luci-app-cpulimit
 svn co https://github.com/project-openwrt/openwrt/branches/master/package/ntlf9t/cpulimit package/lean/cpulimit
 #OpenClash
-git clone -b master --single-branch https://github.com/vernesong/OpenClash package/new/luci-app-openclash
+svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/new/luci-app-openclash
 #SeverChan
 git clone -b master --single-branch https://github.com/tty228/luci-app-serverchan package/new/luci-app-serverchan
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/utils/iputils package/network/utils/iputils
